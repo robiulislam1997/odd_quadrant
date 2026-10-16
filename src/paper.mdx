@@ -35,24 +35,24 @@ import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
 import dogsMsillm from "@/assets/dogs-msillm.jpg"
 
+import oddQuadrant from "./assets/odd_quadrant_latest.png"
+import vShape from "./assets/v_shape_latest.png"
+import quadrant from "./assets/quadrant_latest.png"
+
 <Header
-  title="Academic Project Page Template"
-  conference="Conference Name"
+  title="ODD-Quadrant: Refining Autonomous Driving ODD Specifications by
+      Deciding Edge Cases through Spatially-Grounded LLMs"
+  conference="Under Review"
   authors={[
     {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "University of Texas at Dallas",
-      notes: ["*", "†"],
+      name: "Md Robiul Islam",
+      url: "https://robiulislam1997.github.io",
+      institution: "William & Mary",
+      
     },
-    { name: "Author Two", institution: "Institution Two", notes: ["*", "†"] },
-    { name: "Author Three", institution: "Institution Three", notes: ["*"] },
-    { name: "Author Four", institution: "Institution Four" },
+    { name: "Trey Woodlief", url:"https://treywoodlief.com", institution: "William and Mary" },
   ]}
-  notes={[
-    { symbol: "*", text: "author note one" },
-    { symbol: "†", text: "author note two" },
-  ]}
+
   links={[
     { name: "Paper", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:file-pdf-2-line" },
     { name: "Code", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:github-line" },
@@ -74,145 +74,119 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
 <HighlightedSection>
 
 ## Abstract
-
-This is a template you can use to create a professional-looking, accessible, and performant project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+ Driving Automation Systems (DAS) are designed
+      to operate only within a defined Operational Design Domain
+      (ODD), which specifies the environmental, roadway, and
+      traffic
+      conditions under which the system can operate safely.
+      However,
+      existing driving datasets often include scenes outside a
+      DAS?s
+      ODD, which interfere with development. Removing these re-
+      quires costly manual review since ODDs use vague or
+      context-
+      based terms such as ?heavy rain? or ?bright light.?
+      Previous
+      work has leveraged Large Language Models (LLMs) to resolve
+      these nuances by connecting natural language descriptions
+      with the visual sensor data of the scene, demonstrating
+      near-
+      human performance in data labeling; yet, plain use of LLMs
+      is
+      insufficient. Building on this idea, we introduce
+      ODD-Quadrant,
+      which uses spatially-grounded prompting to improve ODD-
+      decision performance. ODD-Quadrant further introduces an
+      automated refinement loop that analyzes incorrect
+      predictions
+      to iteratively refine prompts, extracting edge cases latent
+      in
+      existing human-labeled datasets, improving model
+      consistency
+      across iterations, and providing, as a final output, human-
+      interpretable refined specifications resolving prior
+      ambiguity.
+      Our evaluations demonstrate that by using spatial prompting
+      and automated refinement, ODD-Quadrant enhances the effi-
+      ciency of detecting ODD compliance, showing improvements of
+      up to 220% over manual approaches while doubling the
+      failure
+      identification over prior work, highlighting the
+      significance of
+      edge case refinement and the capacity to generalize to new
+      data.
 
 </HighlightedSection>
 
-## Visuals
-
-### Image
-
-Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
-
-<Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-
-### Video
-
-<Video src={outside} />
-
-### Wide visual
-
-I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
-
-<Wide>
-  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-</Wide>
-
-### Figure with caption
-
-Wrap a visual in a `Figure` component to add a caption.
-
+## Overview
 <Figure>
-  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
+  <Picture slot="figure" src={oddQuadrant} alt="odd quadrant photo" />
+  <Fragment slot="caption">ODD-Quadrant pipeline to judge sensor dataset compliance to an NL ODD with refinement and spatial prompting.</Fragment>
 </Figure>
 
-### Comparison slider
+### V shape examples
 
-Use the `Comparison` component to compare two visuals with an interactive slider.
 
-<Comparison client:idle >
-  <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Picture slot="itemTwo" src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-</Comparison>
+<Figure>
+  <Picture slot="figure" src={vShape} alt="vShape examples" />
+  <Fragment slot="caption">Human annotated Sharp Curve with our V-Q approach.</Fragment>
+</Figure>
 
-### Tab panels
+### Quadrant examples
 
-Tab panels are a great way to display a labeled collection of related visuals without taking up too much space.
+<Figure>
+  <Picture slot="figure" src={quadrant} alt="odd quadrant examples" />
+  <Fragment slot="caption">Quadrant based example for Construction Zone, Restricted Lane and Intersection.</Fragment>
+</Figure>
 
-<Tabs defaultValue="true">
-  <TabsList>
-    <TabsTrigger value="true">Ground truth</TabsTrigger>
-    <TabsTrigger value="diffc">DiffC (Flux-dev)</TabsTrigger>
-    <TabsTrigger value="msillm">MS-ILLM</TabsTrigger>
-  </TabsList>
-  <TabsContent value="true">
-    <Picture
-      src={dogsTrue}
-      alt="True photo of two dogs running side-by-side in shallow water"
-    />
-  </TabsContent>
-  <TabsContent value="diffc">
-    <Picture
-      src={dogsDiffc}
-      alt="Photo of two running dogs, lossily compressed using the DiffC algorithm"
-    />
-  </TabsContent>
-  <TabsContent value="msillm">
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </TabsContent>
-</Tabs>
 
-### Carousel
 
-A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
 
-<Carousel>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </CarouselSlide>
-</Carousel>
 
-## Two columns
 
-Use the two columns component to display two columns of content. In this example, the first column contains a YouTube video embed and the second column contains an interactive 3D model viewer. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
 
-<TwoColumns>
-  <YouTubeVideo slot="left" videoId="wjZofJX0v4M" />
-  <ModelViewer slot="right" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
-</TwoColumns>
-
-## $\LaTeX$
-
-You can also add $\LaTeX$ formulas, rendered during the build process using [$\KaTeX$](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: $a^2 + b^2 = c^2$. Or, you can write them as a block:
-
-$$
-\int_a^b f(x) dx
-$$
-
-## Citation
-
-If you copy your bibliography into `./bibliography.bib`, you can cite papers using their BibTeX keys, and they'll be automatically formatted and included in the bibliography section at the end. For example: [@vaswani2017attention]. Note that these citations are distinct from footnotes[^mynote], which show up in a separate section if you use them.
-
-[^mynote]: On the web, they should really be called "endnotes", since each page constitutes a full document.
 
 ## Table
 
-Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
+Scenario-specific accuracy (%) of the baseline and
+subsequent refinement configurations, including percentage-point
+changes of the final R.+V-Q configuration relative to the baseline
 
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
+| Scenario | Baseline | Refinement | R.+V-Q | ↑ or ↓ |
+| :--- | :---: | :---: | :---: | :---: |
+| Camera Obstruction | 100 | 100 | 100 | 0.0 → |
+| Sharp Curve | 89.8 | 72.6 ↓ | 96.8 ↑ | 24.2 ↑ |
+| Bright Light | 78.4 | 99.2 ↑ | 99.2 ↑ | 0.0 → |
+| Res. Lane | 93.4 | 95.2 ↑ | 91.4 ↓ | 3.8 ↓ |
+| **Avg. (full ODD)** | **93.7** | **93.7 →** | **96.8 ↑** | **3.1 ↑** |
+
+
+## Comparison of token usage and computational latency between the baseline and ODD-Quadrant
+
+### Token count 
+| Method | Mean | Median | STD. | P5 | P95 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Baseline | 172 | 160 | 29 | 149 | 211 |
+| **ODD-Quadrant** | 378 | **383** | 78 | **244** | 497 |
+
+### Response time 
+| Method | Mean | Median | STD. | P5 | P95 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Baseline | 6.54 | 6.53 | 0.67 | 5.53 | **7.70** |
+| **ODD-Quadrant** | 12.86 | **7.70** | 12.43 | 5.81 | **30.29** |
 
 ## BibTeX citation
 
-Displaying the BibTeX entry for your paper in a code block makes it easy to copy and paste.
-
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@misc{robiulislam,
+  author = "{Md Robiul Islam, Trey Woodlief}",
+  title = "ODD-Quadrant: Refining Autonomous Driving ODD Specifications by
+      Deciding Edge Cases through Spatially-Grounded LLMs",
+  year = "2026",
+  howpublished = "\url{underreview}",
 }
 ```
 
-## Bibliography
 
-[^ref]
+
+
